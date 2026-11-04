@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aline Maia — Criadora de Conteúdo UGC</title>
+<meta name="description" content="Aline Maia, criadora de conteúdo UGC. Moda, beleza, hair e vida fitness.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #FBF8F5;
+    --cream-deep: #F1E9E7;
+    --ink: #241A1C;
+    --ink-soft: #6B5C5E;
+    --gold: #7B2635;
+    --gold-soft: #A24856;
+    --line: rgba(36,26,28,0.13);
+    --white: #FFFFFF;
+    --max: 1100px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow{
+    font-family:'Work Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom: 14px;
+  }
+  .eyebrow::before{
+    content:'';
+    width: 20px; height:1px;
+    background: var(--gold);
+    display:inline-block;
+  }
+
+  .wrap{ max-width: var(--max); margin:0 auto; padding: 0 28px; }
+  section{ padding: 90px 0; }
+  @media (max-width: 720px){ section{ padding: 64px 0; } }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position: fixed; top:0; left:0; right:0; z-index: 500;
+    background: rgba(247,241,230,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s ease, box-shadow .3s ease;
+  }
+  header.nav.scrolled{
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 6px 24px rgba(42,33,25,0.05);
+  }
+  header.nav.on-photo{ background: transparent; }
+  header.nav.on-photo .nav-name, header.nav.on-photo .nav-links a{ color:#fff; }
+  header.nav.on-photo .nav-cta{ background: rgba(255,255,255,0.14); color:#fff; backdrop-filter: blur(6px); }
+
+  .nav-inner{
+    max-width: 1240px; margin:0 auto; padding: 18px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-name{
+    font-family:'Fraunces', serif; font-size:1.1rem; font-weight:600;
+    letter-spacing: 0.02em; transition: color .3s ease;
+  }
+  .nav-links{
+    display:flex; gap: 30px; list-style:none; margin:0; padding:0;
+  }
+  .nav-links a{
+    font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight:500;
+    transition: color .25s ease;
+  }
+  .nav-links a:hover{ color: var(--gold); }
+
+  .nav-cta{
+    background: var(--ink); color: var(--cream);
+    padding: 9px 20px; border-radius: 999px;
+    font-size: 0.78rem; letter-spacing:0.03em; font-weight:500;
+    transition: background .25s ease, transform .25s ease;
+    white-space: nowrap;
+  }
+  .nav-cta:hover{ background: var(--gold); transform: translateY(-1px); }
+
+  .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px; }
+  .burger span{ width:22px; height:1.5px; background: currentColor; display:block; }
+
+  @media (max-width: 860px){
+    .nav-links{
+      position:fixed; top:0; right:0; height:100vh; width:min(72vw,300px);
+      background: var(--white); flex-direction:column; padding: 100px 36px;
+      gap: 24px; transform: translateX(100%); transition: transform .35s ease;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.08);
+    }
+    .nav-links a{ color: var(--ink-soft) !important; }
+    .nav-links.open{ transform: translateX(0); }
+    .burger{ display:flex; }
+    .nav-cta{ display:none; }
+  }
+
+  /* ---------- HERO (full photo cover) ---------- */
+  .hero{
+    position:relative; height: 100vh; min-height: 560px; width:100%;
+    overflow:hidden;
+  }
+  .hero img{
+    width:100%; height:100%; object-fit:cover; object-position: center 22%;
+  }
+  .hero::after{
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(20,15,10,0.15) 0%, rgba(20,15,10,0) 30%, rgba(20,15,10,0.55) 100%);
+  }
+  .hero-content{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    padding: 0 28px 56px;
+    color:#fff;
+  }
+  .hero-content .eyebrow{ color: var(--gold-soft); }
+  .hero-content .eyebrow::before{ background: var(--gold-soft); }
+  .hero-content h1{
+    font-size: clamp(3rem, 9vw, 5.6rem);
+    line-height: 0.95;
+    color:#fff;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.5);
+  }
+  .hero-content h1 em{
+    font-style:italic; font-weight:500; color: #E7B3BC;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.55);
+  }
+  .hero-tagline{
+    font-family:'Fraunces', serif; font-style: italic;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: rgba(255,255,255,0.85); margin-top:16px;
+  }
+  .hero-actions{ display:flex; gap:14px; margin-top: 28px; flex-wrap:wrap; }
+
+  .btn-primary{
+    background: var(--gold); color: var(--ink); padding: 14px 26px;
+    border-radius: 999px; font-size:0.85rem; letter-spacing:0.02em; font-weight:600;
+    display:inline-flex; align-items:center; gap:8px;
+    transition: background .25s ease, transform .25s ease;
+  }
+  .btn-primary:hover{ background: var(--gold-soft); transform: translateY(-2px); }
+  .btn-ghost{
+    border:1px solid rgba(255,255,255,0.55); color: #fff; padding: 14px 22px;
+    border-radius:999px; font-size:0.85rem; font-weight:500;
+    display:inline-flex; align-items:center; gap:8px;
+    transition: background .25s ease, transform .25s ease;
+  }
+  .btn-ghost:hover{ background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+  .scroll-cue{
+    position:absolute; bottom: 22px; right: 28px; z-index:2;
+    color: rgba(255,255,255,0.75); font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase;
+    writing-mode: vertical-rl; display:flex; align-items:center; gap:10px;
+  }
+  .scroll-cue::after{ content:''; width:1px; height:34px; background: rgba(255,255,255,0.5); }
+  @media (max-width: 720px){ .scroll-cue{ display:none; } }
+
+  /* ---------- SOBRE (short) ---------- */
+  .sobre-inner{ max-width: 640px; }
+  .sobre p{
+    font-family:'Fraunces', serif; font-size: clamp(1.3rem,2.4vw,1.7rem);
+    line-height: 1.5; color: var(--ink); margin:0;
+  }
+
+  /* ---------- ESTILOS ---------- */
+  .estilos{ background: var(--cream-deep); }
+  .estilos h2{ font-size: clamp(1.8rem,3.2vw,2.3rem); margin-bottom: 30px; }
+  .pill-grid{ display:flex; flex-wrap:wrap; gap: 12px; }
+  .pill{
+    border:1px solid var(--line); border-radius: 999px;
+    padding: 13px 24px; font-family:'Fraunces', serif; font-size:1.05rem;
+    background: var(--white);
+    transition: border-color .25s ease, transform .25s ease;
+  }
+  .pill:hover{ border-color: var(--gold); transform: translateY(-2px); }
+
+  /* ---------- VIDEOS ---------- */
+  .videos h2{ font-size: clamp(1.8rem,3.2vw,2.3rem); margin-bottom: 34px; }
+
+  .video-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 26px 22px; }
+  @media (max-width: 900px){ .video-grid{ grid-template-columns: repeat(2, 1fr); gap: 22px 16px; } }
+  @media (max-width: 560px){ .video-grid{ grid-template-columns: 1fr; max-width: 340px; margin:0 auto; } }
+
+  .video-card{ position:relative; padding-top: 24px; }
+  .video-thumb{
+    position:relative; aspect-ratio: 9/16; border-radius: 8px; overflow:hidden;
+    background: #000; cursor:pointer;
+    box-shadow: 0 10px 24px rgba(42,33,25,0.1);
+  }
+  .video-thumb img{ width:100%; height:100%; object-fit:cover; transition: transform .5s ease; }
+  .video-thumb:hover img{ transform: scale(1.04); }
+  .video-thumb .play-btn{
+    position:absolute; inset:0; margin:auto; width:50px; height:50px;
+    background: rgba(255,253,248,0.92); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transition: transform .25s ease, background .25s ease;
+  }
+  .video-thumb:hover .play-btn{ transform: scale(1.08); background: #fff; }
+  .video-thumb .play-btn svg{ width:16px; height:16px; margin-left:2px; fill: var(--ink); }
+  .video-thumb::after{
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.5) 100%);
+    pointer-events:none;
+  }
+
+  .tag{
+    position:absolute; top: 0; right: -6px; z-index:3;
+    background: var(--white); border:1px solid var(--line);
+    padding: 6px 12px; border-radius: 4px;
+    font-size: 0.68rem; font-weight:500;
+    color: var(--ink); display:flex; align-items:center; gap:5px;
+    transform: rotate(-5deg);
+    transition: transform .3s ease, background .2s ease, color .2s ease;
+    box-shadow: 0 4px 10px rgba(42,33,25,0.12);
+  }
+  .video-card:hover .tag{ transform: rotate(0deg); }
+  .tag:hover{ background: var(--ink); color: var(--white); }
+
+  /* ---------- FOTOS (2 side by side) ---------- */
+  .alcance{ background: var(--cream-deep); }
+  .alcance-grid{ display:grid; grid-template-columns: 1.3fr 0.7fr; gap: 50px; align-items:center; }
+  .alcance h2{ font-size: clamp(1.8rem,3.2vw,2.3rem); margin-bottom: 34px; max-width: 460px; }
+  .stats{ display:flex; gap: 38px; flex-wrap:wrap; }
+  .stat strong{ display:block; font-family:'Fraunces', serif; font-weight:500; font-size: clamp(2rem,4vw,2.9rem); color: var(--gold); line-height:1; }
+  .stat span{ display:block; margin-top:8px; font-size:0.8rem; letter-spacing:0.05em; text-transform:uppercase; color: var(--ink-soft); }
+  .stats-note{ margin: 26px 0 0; font-size:0.78rem; color: var(--ink-soft); }
+  .alcance .video-card{ max-width: 280px; width:100%; justify-self:center; }
+  @media (max-width: 800px){
+    .alcance-grid{ grid-template-columns: 1fr; gap: 40px; }
+    .alcance .video-card{ justify-self:start; }
+  }
+
+  .modal-reel{ display:none; margin-top:8px; }
+  .modal-reel.show{ display:block; }
+
+  .fotos h2{ font-size: clamp(1.8rem,3.2vw,2.3rem); margin-bottom: 30px; }
+  .foto-pair{ display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .foto-pair figure{ margin:0; border-radius: 8px; overflow:hidden; aspect-ratio: 4/5; }
+  .foto-pair img{ width:100%; height:100%; object-fit:cover; transition: transform .5s ease; }
+  .foto-pair figure:hover img{ transform: scale(1.04); }
+  @media (max-width: 560px){ .foto-pair{ grid-template-columns: 1fr; max-width:340px; margin:0 auto; } }
+
+  /* ---------- MARCAS ---------- */
+  .marcas{ background: var(--cream-deep); }
+  .marcas h2{ font-size: clamp(1.8rem,3.2vw,2.3rem); margin-bottom: 26px; }
+  .marca-row{ display:flex; flex-wrap:wrap; gap: 10px; }
+  .marca-chip{
+    border: 1px solid var(--line); border-radius: 999px; padding: 11px 20px;
+    font-size:0.88rem; background: var(--white);
+    transition: all .25s ease;
+  }
+  .marca-chip:hover{ border-color: var(--gold); background: var(--ink); color: var(--cream); }
+
+  /* ---------- FEEDBACKS ---------- */
+
+  /* ---------- CONTATO ---------- */
+  .contato-box{
+    background: var(--white); color: var(--ink); border-radius: 20px;
+    padding: 60px 40px; text-align:center;
+    border: 1px solid var(--line);
+  }
+  .contato-box .eyebrow{ color: var(--gold); justify-content:center; }
+  .contato-box .eyebrow::before{ background: var(--gold); }
+  .contato-box h2{ font-size: clamp(2rem,4.5vw,2.8rem); color: var(--ink); margin: 0 auto 30px; max-width: 480px; }
+
+  .whats-btn{
+    background: var(--gold); color: #fff; padding: 18px 30px; border-radius: 12px;
+    font-family:'Fraunces', serif; font-size:1.15rem; font-weight:500;
+    display:inline-flex; align-items:center; gap:12px;
+    transition: transform .25s ease, background .25s ease;
+  }
+  .whats-btn:hover{ transform: translateY(-2px); background: var(--gold-soft); }
+  .whats-btn svg{ width:20px; height:20px; }
+
+  .contact-secondary{
+    display:flex; justify-content:center; gap: 26px; margin-top: 26px; flex-wrap:wrap;
+  }
+  .contact-secondary a{
+    font-size: 0.88rem; color: var(--ink-soft);
+    transition: color .2s ease;
+  }
+  .contact-secondary a:hover{ color: var(--gold); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding: 34px 0 50px; text-align:center; }
+  footer p{ font-size:0.76rem; color: var(--ink-soft); }
+  footer .foot-name{ font-family:'Fraunces', serif; font-style:italic; color: var(--gold); }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background: rgba(24,19,14,0.88);
+    display:none; align-items:center; justify-content:center; z-index:1000;
+    padding: 30px;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-box{ position:relative; max-width: 400px; width:100%; }
+  .modal-box video{ width:100%; max-height: 84vh; border-radius: 10px; background:#000; }
+  .modal-close{
+    position:absolute; top:-44px; right:0; background:none; border:none;
+    color:#fff; font-size:1.8rem; cursor:pointer; line-height:1; padding:6px;
+    font-family:'Fraunces', serif;
+  }
+  .modal-tagline{
+    text-align:center; margin-top:14px; color: rgba(255,255,255,0.65); font-size:0.85rem;
+  }
+  .modal-tagline a{ color: var(--gold-soft); font-weight:500; }
+
+  .reveal{ opacity:0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.show{ opacity:1; transform:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<header class="nav on-photo" id="siteNav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-name">Aline Maia</a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#videos">Vídeos</a></li>
+        <li><a href="#fotos">Fotos</a></li>
+        <li><a href="#marcas">Marcas</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#contato">Vamos trabalhar juntos</a>
+    <button class="burger" id="burgerBtn" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="assets/img/hero.jpg" alt="Aline Maia, criadora de conteúdo UGC">
+  <div class="hero-content">
+    <span class="eyebrow">Criadora de conteúdo UGC</span>
+    <h1>Aline <em>Maia</em></h1>
+    <p class="hero-tagline">"Criadora de conteúdo UGC que vende."</p>
+    <div class="hero-actions">
+      <a class="btn-ghost" href="https://instagram.com/maiaxzy_" target="_blank" rel="noopener">@maiaxzy_</a>
+    </div>
+  </div>
+  <span class="scroll-cue">Role para ver mais</span>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="wrap sobre-inner reveal">
+    <span class="eyebrow">Sobre mim</span>
+    <p>Criadora de conteúdo UGC e estudante de Publicidade e Propaganda. Transformo produtos em vídeos com a identidade da marca — mas com a espontaneidade de quem entende de rede social.</p>
+  </div>
+</section>
+
+<!-- ESTILOS -->
+<section class="estilos" id="estilos">
+  <div class="wrap">
+    <span class="eyebrow reveal">Estilos de conteúdo</span>
+    <h2 class="reveal">Moda · Beleza · Hair · Vida Fitness</h2>
+    <div class="pill-grid reveal">
+      <span class="pill">Moda</span>
+      <span class="pill">Beleza</span>
+      <span class="pill">Hair</span>
+      <span class="pill">Vida Fitness</span>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="videos" id="videos">
+  <div class="wrap">
+    <span class="eyebrow reveal">Melhores vídeos</span>
+    <h2 class="reveal">Já rodou por aí</h2>
+
+    <div class="video-grid">
+
+      <div class="video-card reveal">
+        <a class="tag" href="https://www.instagram.com/exageradosburgueroficial/" target="_blank" rel="noopener">@exageradosburgueroficial ↗</a>
+        <div class="video-thumb" data-video="assets/video/v-exagerados-1.mp4">
+          <img src="assets/img/poster-exagerados-1.jpg" alt="Vídeo UGC para Exagerados Burguer">
+          <span class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <a class="tag" href="https://www.instagram.com/exageradosburgueroficial/" target="_blank" rel="noopener">@exageradosburgueroficial ↗</a>
+        <div class="video-thumb" data-video="assets/video/v-exagerados-2.mp4">
+          <img src="assets/img/poster-exagerados-2.jpg" alt="Vídeo UGC para Exagerados Burguer">
+          <span class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <a class="tag" href="https://www.instagram.com/hentsburg/" target="_blank" rel="noopener">@hentsburg ↗</a>
+        <div class="video-thumb" data-video="assets/video/v-hentsburg.mp4">
+          <img src="assets/img/poster-hentsburg.jpg" alt="Vídeo UGC para Hents Burg">
+          <span class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <a class="tag" href="https://www.instagram.com/vip.beachtennis/" target="_blank" rel="noopener">@vip.beachtennis ↗</a>
+        <div class="video-thumb" data-video="assets/video/v-vipbeachtennis.mp4">
+          <img src="assets/img/poster-vipbeachtennis.jpg" alt="Vídeo UGC para VIP Beach Tennis">
+          <span class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <a class="tag" href="https://www.instagram.com/eletronicacentralmusic/" target="_blank" rel="noopener">@eletronicacentralmusic ↗</a>
+        <div class="video-thumb" data-video="assets/video/v-eletronicacentral.mp4">
+          <img src="assets/img/poster-eletronicacentral.jpg" alt="Vídeo UGC para Eletrônica Central Music">
+          <span class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <a class="tag" href="https://www.instagram.com/estacaosaraiva/" target="_blank" rel="noopener">@estacaosaraiva ↗</a>
+        <div class="video-thumb" data-video="assets/video/v-estacaosaraiva.mp4">
+          <img src="assets/img/poster-estacaosaraiva.jpg" alt="Vídeo UGC para Estação Saraiva">
+          <span class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ALCANCE ORGANICO -->
+<section class="alcance" id="alcance">
+  <div class="wrap alcance-grid">
+    <div>
+      <span class="eyebrow reveal">Alcance orgânico</span>
+      <h2 class="reveal">Conteúdo que as pessoas assistem</h2>
+      <div class="stats reveal">
+        <div class="stat"><strong>251,1 mil</strong><span>Visualizações</span></div>
+        <div class="stat"><strong>393</strong><span>Novos seguidores</span></div>
+        <div class="stat"><strong>3,4 mil</strong><span>Visitas ao perfil</span></div>
+      </div>
+      <p class="stats-note reveal">Dados do Instagram, 5 de out a 3 de nov. Sem anúncios.</p>
+    </div>
+    <div class="video-card reveal">
+      <a class="tag" href="https://www.instagram.com/reel/DfInzemC4u8/" target="_blank" rel="noopener">Ver no Instagram ↗</a>
+      <div class="video-thumb" data-video="assets/video/v-serie.mp4" data-reel="https://www.instagram.com/reel/DfInzemC4u8/">
+        <img src="assets/img/poster-serie.jpg" alt="Reel de @maiaxzy_ com alcance orgânico">
+        <span class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOTOS (2 lado a lado) -->
+<section class="fotos" id="fotos">
+  <div class="wrap">
+    <span class="eyebrow reveal">Fotos</span>
+    <h2 class="reveal">Still</h2>
+    <div class="foto-pair reveal" style="margin-top:30px;">
+      <figure><img src="assets/img/photo-phone.jpg" alt="Aline Maia fazendo selfie"></figure>
+      <figure><img src="assets/img/photo-tablet.jpg" alt="Aline Maia sorrindo com tablet"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- MARCAS -->
+<section class="marcas" id="marcas">
+  <div class="wrap">
+    <span class="eyebrow reveal">Marcas que já confiaram</span>
+    <h2 class="reveal">Parcerias</h2>
+    <div class="marca-row reveal" style="margin-top:26px;">
+      <a class="marca-chip" href="https://www.instagram.com/exageradosburgueroficial/" target="_blank" rel="noopener">Exagerados Burguer</a>
+      <a class="marca-chip" href="https://www.instagram.com/hentsburg/" target="_blank" rel="noopener">Hents Burg</a>
+      <a class="marca-chip" href="https://www.instagram.com/vip.beachtennis/" target="_blank" rel="noopener">VIP Beach Tennis</a>
+      <a class="marca-chip" href="https://www.instagram.com/eletronicacentralmusic/" target="_blank" rel="noopener">Eletrônica Central Music</a>
+      <a class="marca-chip" href="https://www.instagram.com/estacaosaraiva/" target="_blank" rel="noopener">Estação Saraiva</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="wrap">
+    <div class="contato-box reveal">
+      <span class="eyebrow">Contato</span>
+      <h2>Vamos criar para a sua marca?</h2>
+      <a class="whats-btn" href="https://wa.me/5585999389854?text=Oi%20Maia!%20Vim%20pelo%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20uma%20parceria" target="_blank" rel="noopener">
+        Fechar uma parceria
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.72.45 3.4 1.3 4.88L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.14c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.11.11-1.8-.11-.42-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.14-4.88-4.33-.14-.19-1.17-1.56-1.17-2.98 0-1.42.74-2.11 1.01-2.4.26-.29.57-.36.76-.36h.55c.18 0 .42-.03.65.5.24.55.81 1.9.88 2.04.07.14.11.3.02.49-.09.19-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.28-.12.56.16.28.72 1.19 1.55 1.93 1.06.94 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.28.36-.23.6-.14.24.1 1.55.73 1.82.86.27.14.45.2.51.32.07.12.07.65-.17 1.33z"/></svg>
+      </a>
+      <div class="contact-secondary">
+        <a href="mailto:clientesmaia27@gmail.com">clientesmaia27@gmail.com</a>
+        <a href="https://instagram.com/maiaxzy_" target="_blank" rel="noopener">@maiaxzy_</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Aline <span class="foot-name">Maia</span> — Criadora de conteúdo UGC</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Fechar vídeo">×</button>
+    <video id="modalVideo" controls playsinline></video>
+    <p class="modal-tagline">Gostou? <a href="#contato" id="modalCtaLink">Vamos fechar uma parceria →</a> <a class="modal-reel" id="modalReel" href="#" target="_blank" rel="noopener">Ver no Instagram ↗</a></p>
+  </div>
+</div>
+
+<script>
+  const navEl = document.getElementById('siteNav');
+  const heroH = () => document.querySelector('.hero').offsetHeight;
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 30;
+    navEl.classList.toggle('scrolled', scrolled);
+    navEl.classList.toggle('on-photo', window.scrollY < heroH() - 90);
+  });
+
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('show');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  const overlay = document.getElementById('modalOverlay');
+  const modalVideo = document.getElementById('modalVideo');
+  const modalClose = document.getElementById('modalClose');
+  const modalReel = document.getElementById('modalReel');
+
+  document.querySelectorAll('.video-thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const src = thumb.getAttribute('data-video');
+      modalVideo.src = src;
+      const reel = thumb.getAttribute('data-reel');
+      modalReel.classList.toggle('show', !!reel);
+      if (reel) modalReel.href = reel;
+      overlay.classList.add('open');
+      modalVideo.play().catch(()=>{});
+    });
+  });
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    modalVideo.pause();
+    modalVideo.src = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>
